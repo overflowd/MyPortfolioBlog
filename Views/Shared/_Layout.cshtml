@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - MyPortfolioBlog</title>
+    <link rel="stylesheet" href="~/css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Anasayfa</a></li>
+                <li><a href="/Home/About">Hakkımda</a></li>
+                <li><a href="/Home/Blog">Blog</a></li>
+                <li><a href="/Home/Contact">İletişim</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main role="main" class="pb-3">
+        @RenderBody() <!-- RenderBody metodu view dosyalarının içeriğini buraya yerleştirecek -->
+    </main>
+    <footer>
+        <p>&copy; 2024 Benim Adım</p>
+    </footer>
+</body>
+</html>

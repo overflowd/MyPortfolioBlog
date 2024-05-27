@@ -1,0 +1,21 @@
+﻿@model List<MyPortfolioBlog.Models.BlogPost>
+@{
+    ViewData["Title"] = "Blog";
+}
+
+<h1>Blog</h1>
+@if (Model != null && Model.Any())
+{
+    foreach (var post in Model)
+    {
+        <div>
+            <h2>@post.Title</h2>
+            <p>@post.Content</p>
+            <small>@post.CreatedAt.ToString("dd/MM/yyyy")</small>
+        </div>
+    }
+}
+else
+{
+    <p>Henüz bir blog gönderisi bulunmamaktadır.</p>
+}
