@@ -2,19 +2,33 @@
     ViewData["Title"] = "İletişim";
 }
 
-<h1>İletişim</h1>
-<form method="post" action="/Home/Contact">
-    <div>
-        <label for="name">Adınız:</label>
-        <input type="text" id="name" name="name" required />
+<div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+        <p>Aşağıdaki formu doldurarak bana ulaşabilirsiniz.</p>
+        <form method="post" action="/Home/Contact">
+            <div class="control-group">
+                <div class="form-group floating-label-form-group controls">
+                    <label>Ad-Soyad</label>
+                    <input type="text" class="form-control" placeholder="Ad-Soyad" id="name" name="name" required data-validation-required-message="Lütfen adınızı giriniz.">
+                    <p class="help-block text-danger"></p>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="form-group floating-label-form-group controls">
+                    <label>Mesaj</label>
+                    <textarea rows="5" class="form-control" placeholder="Mesajınız" id="message" name="message" required data-validation-required-message="Lütfen mesajınızı giriniz."></textarea>
+                    <p class="help-block text-danger"></p>
+                </div>
+            </div>
+            <br>
+            <div id="success"></div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" id="sendMessageButton">Gönder</button>
+            </div>
+        </form>
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-success">@ViewBag.Message</div>
+        }
     </div>
-    <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required />
-    </div>
-    <div>
-        <label for="message">Mesajınız:</label>
-        <textarea id="message" name="message" required></textarea>
-    </div>
-    <button type="submit">Gönder</button>
-</form>
+</div>

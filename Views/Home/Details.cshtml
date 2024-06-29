@@ -1,0 +1,20 @@
+﻿@model MyPortfolioBlog.Models.BlogPost
+
+@{
+    ViewBag.Post = Model;
+    ViewData["Title"] = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Details";
+}
+
+<div class="container">
+    <h2 class="page-title">@Model.Title</h2>
+
+    <div class="blog-content">
+        <img src="@Model.ImageUrl" alt="@Model.Title" width="500" height="300">
+        <p>@Model.Content</p>
+    </div>
+
+    <p><a href="@Url.Action("Blog", "Home")">Tüm Yazılara dönmek için tıklayınız.</a></p>
+    <p><a href="@Url.Action("")">Anasayfaya dönmek için tıklayınız.</a></p>
+</div>

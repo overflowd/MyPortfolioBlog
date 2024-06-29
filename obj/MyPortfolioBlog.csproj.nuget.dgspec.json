@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\atala\\source\\repos\\MyPortfolioBlog\\MyPortfolioBlog.csproj": {}
+    "C:\\Users\\atala\\source\\repos\\overflowd\\MyPortfolioBlog\\MyPortfolioBlog.csproj": {}
   },
   "projects": {
-    "C:\\Users\\atala\\source\\repos\\MyPortfolioBlog\\MyPortfolioBlog.csproj": {
+    "C:\\Users\\atala\\source\\repos\\overflowd\\MyPortfolioBlog\\MyPortfolioBlog.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\atala\\source\\repos\\MyPortfolioBlog\\MyPortfolioBlog.csproj",
+        "projectUniqueName": "C:\\Users\\atala\\source\\repos\\overflowd\\MyPortfolioBlog\\MyPortfolioBlog.csproj",
         "projectName": "MyPortfolioBlog",
-        "projectPath": "C:\\Users\\atala\\source\\repos\\MyPortfolioBlog\\MyPortfolioBlog.csproj",
+        "projectPath": "C:\\Users\\atala\\source\\repos\\overflowd\\MyPortfolioBlog\\MyPortfolioBlog.csproj",
         "packagesPath": "C:\\Users\\atala\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\atala\\source\\repos\\MyPortfolioBlog\\obj\\",
+        "outputPath": "C:\\Users\\atala\\source\\repos\\overflowd\\MyPortfolioBlog\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\atala\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -46,6 +46,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.5, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",

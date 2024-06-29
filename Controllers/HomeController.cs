@@ -1,55 +1,106 @@
-using Microsoft.AspNetCore.Mvc;
+ï»¿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using MyPortfolioBlog.Data;
 using MyPortfolioBlog.Models;
 using System.Linq;
-using System.Collections.Generic;
+using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace MyPortfolioBlog.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<HomeController> _logger;
+        private readonly IConfiguration _configuration;
 
-        public HomeController(ApplicationDbContext context)
+        public HomeController(ApplicationDbContext context, ILogger<HomeController> logger, IConfiguration configuration)
         {
             _context = context;
+            _logger = logger;
+            _configuration = configuration;
         }
 
         public IActionResult Index()
         {
             var posts = _context.BlogPosts.ToList();
+            ViewData["Title"] = "Ana Sayfa";
             return View(posts);
         }
 
         public IActionResult About()
         {
+            ViewData["Title"] = "HakkÄ±mda";
             return View();
         }
 
         public IActionResult Blog()
         {
             var posts = _context.BlogPosts.ToList();
+            ViewData["Title"] = "Blog";
             return View(posts);
         }
 
         public IActionResult Contact()
         {
+            ViewData["Title"] = "Ä°letiÅŸim";
             return View();
         }
 
         [HttpPost]
-        public IActionResult Contact(string name, string email, string message)
+        public IActionResult Contact(string name, string message)
         {
-            // Burada formdan gelen verileri iþleyebilirsiniz.
-            // Örneðin, veritabanýna kaydedebilir veya email ile gönderebilirsiniz.
+            try
+            {
+                var smtpSettings = _configuration.GetSection("SmtpSettings");
+                var fromAddress = new MailAddress(smtpSettings["SenderEmail"], smtpSettings["SenderName"]);
+                var toAddress = new MailAddress("atalaycelik4@gmail.com", "Atalay Ã‡elik");
+                string fromPassword = smtpSettings["Password"];
+                const string subject = "AtalayÃ‡elikBlog";
+                string body = $"Ad-Soyad: {name}\n\nMesaj: {message}";
 
-            ViewBag.Message = "Mesajýnýz gönderildi. Teþekkürler!";
+                var smtp = new SmtpClient
+                {
+                    Host = smtpSettings["Server"],
+                    Port = int.Parse(smtpSettings["Port"]),
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                };
+                using (var mailMessage = new MailMessage(fromAddress, toAddress)
+                {
+                    Subject = subject,
+                    Body = body
+                })
+                {
+                    smtp.Send(mailMessage);
+                }
+                ViewBag.Message = "MesajÄ±nÄ±z gÃ¶nderildi. TeÅŸekkÃ¼rler!";
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = $"Mesaj gÃ¶nderilirken bir hata oluÅŸtu: {ex.Message}";
+            }
+
             return View();
         }
 
         public IActionResult Error()
         {
             return View();
+        }
+
+        public IActionResult Details(int id)
+        {
+            var post = _context.BlogPosts.FirstOrDefault(p => p.Id == id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+            return View(post);
         }
     }
 }

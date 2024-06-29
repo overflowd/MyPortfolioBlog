@@ -1,27 +1,14 @@
-﻿@model List<MyPortfolioBlog.Models.BlogPost>
-@{
+﻿@{
     ViewData["Title"] = "Anasayfa";
 }
 
-<h1>Hoş Geldiniz!</h1>
-<p>Bu benim kişisel blog/portfolyo sitem.</p>
-
-<h2>Son Blog Gönderileri</h2>
-@if (Model != null && Model.Any())
-{
-    foreach (var post in Model)
-    {
-        <div>
-            <h3>@post.Title</h3>
-            <p>@post.Content</p>
-            <small>@post.CreatedAt.ToString("dd/MM/yyyy")</small>
+<div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-preview">
+           <h1 class="main-title">
+           Merhaba ben Atalay Çelik blog sayfama hoşgeldiniz. Yazılarıma yukarıdan blog sayfasına tıklayarak ulaşabilirsiniz.
+           </h1>
         </div>
-    }
-}
-else
-{
-    <p>Henüz bir blog gönderisi bulunmamaktadır.</p>
-}
-
-<h2>Son Portfolyo Projeleri</h2>
-<p>Henüz portfolyo projelerim bulunmamaktadır.</p>
+        <hr>
+    </div>
+</div>
